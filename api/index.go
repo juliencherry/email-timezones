@@ -32,14 +32,18 @@ func Handler(w http.ResponseWriter, r *http.Request) {
       ip = r.RemoteAddr
    }
 
-   timezone := geo.Locator{ip}.Timezone()
+   geolocator := geo.NewLocator(ip)
 
-   location, err := time.LoadLocation(timezone)
+   location, err := time.LoadLocation(geolocator.Timezone())
    if (err == nil) {
       datetime = datetime.In(location)
    }
 
-   imageText := []string{datetime.Format("January 2, 2006"), datetime.Format("3:00 PM") + " " + timezone}
+   imageText := []string{
+      datetime.Format("January 2, 2006"),
+      datetime.Format("3:00 PM") + " " + geolocator.City(),
+   }
+
    imageBuffer := new(bytes.Buffer)
 
    err = textimage.Write(imageText, imageBuffer)
