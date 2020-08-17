@@ -39,8 +39,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
       datetime = datetime.In(location)
    }
 
-   imageText := datetime.Format("January 2, 2006 at 3:00 PM") + " " + timezone
-
+   imageText := []string{datetime.Format("January 2, 2006"), datetime.Format("3:00 PM") + " " + timezone}
    imageBuffer := new(bytes.Buffer)
 
    err = textimage.Write(imageText, imageBuffer)

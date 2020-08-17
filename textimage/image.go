@@ -12,7 +12,7 @@ import (
 	"golang.org/x/image/font"
 )
 
-func Write(text string, imageBuffer *bytes.Buffer)  error {
+func Write(text []string, imageBuffer *bytes.Buffer)  error {
 
 	resp, err := http.Get("https://github.com/golang/freetype/blob/e2365dfdc4a05e4b8299a783240d4a7d5a65d4e4/testdata/luxisr.ttf?raw=true")
 	if err != nil {
@@ -31,7 +31,7 @@ func Write(text string, imageBuffer *bytes.Buffer)  error {
 	}
 
 	fg, bg := image.Black, image.White
-	rgba := image.NewRGBA(image.Rect(0, 0, 300, 35))
+	rgba := image.NewRGBA(image.Rect(0, 0, 155, 55))
 	draw.Draw(rgba, rgba.Bounds(), bg, image.ZP, draw.Src)
 
 	size := 12.0
@@ -45,10 +45,13 @@ func Write(text string, imageBuffer *bytes.Buffer)  error {
 	c.SetHinting(font.HintingNone)
 
 	pt := freetype.Pt(10, 10 + int(c.PointToFixed(size) >> 6))
-	_, err = c.DrawString(text, pt)
-	if err != nil {
-		return err
-	}
+		for _, s := range text {
+			_, err = c.DrawString(s, pt)
+			if err != nil {
+				return err
+			}
+			pt.Y += c.PointToFixed(size * 1.5)
+		}
 
 	err = png.Encode(imageBuffer, rgba)
 	if err != nil {
