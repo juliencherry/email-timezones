@@ -31,7 +31,7 @@ func Write(text []string, imageBuffer *bytes.Buffer)  error {
 	}
 
 	fg, bg := image.Black, image.White
-	rgba := image.NewRGBA(image.Rect(0, 0, 155, 55))
+	rgba := image.NewRGBA(image.Rect(0, 0, 150, 39))
 	draw.Draw(rgba, rgba.Bounds(), bg, image.ZP, draw.Src)
 
 	size := 12.0
@@ -44,7 +44,7 @@ func Write(text []string, imageBuffer *bytes.Buffer)  error {
 	c.SetSrc(fg)
 	c.SetHinting(font.HintingNone)
 
-	pt := freetype.Pt(10, 10 + int(c.PointToFixed(size) >> 6))
+	pt := freetype.Pt(0, int(c.PointToFixed(size) >> 6))
 		for _, s := range text {
 			_, err = c.DrawString(s, pt)
 			if err != nil {
