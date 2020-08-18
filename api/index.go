@@ -41,7 +41,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
    imageText := []string{
       datetime.Format("Monday, January 2"),
-      datetime.Format("3:00 PM") + " " + geolocator.City(),
+      datetime.Format("3:04 PM") + " " + geolocator.City(),
    }
 
    imageBuffer := new(bytes.Buffer)
