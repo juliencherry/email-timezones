@@ -31,7 +31,7 @@ func Write(text []string, imageBuffer *bytes.Buffer)  error {
 	}
 
 	fg, bg := image.Black, image.White
-	rgba := image.NewRGBA(image.Rect(0, 0, 150, 39))
+	rgba := image.NewRGBA(image.Rect(0, 0, 200, 39))
 	draw.Draw(rgba, rgba.Bounds(), bg, image.ZP, draw.Src)
 
 	size := 14.0
