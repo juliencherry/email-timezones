@@ -31,12 +31,12 @@ func Write(text []string, imageBuffer *bytes.Buffer)  error {
 	}
 
 	fg, bg := image.Black, image.White
-	rgba := image.NewRGBA(image.Rect(0, 0, 200, 39))
+	rgba := image.NewRGBA(image.Rect(0, 0, 250, 41))
 	draw.Draw(rgba, rgba.Bounds(), bg, image.ZP, draw.Src)
 
-	size := 14.0
+	size := 9.0
 	c := freetype.NewContext()
-	c.SetDPI(72)
+	c.SetDPI(120)
 	c.SetFont(f)
 	c.SetFontSize(size)
 	c.SetClip(rgba.Bounds())
